@@ -1,0 +1,882 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="TV, radio, direct mail, press and digital advertising for retailers. Furniture specialists.">
+<title>RPM Media &amp; Advertising</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&family=Instrument+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: dark editorial agency site — full-bleed showreel hero, then alternating Ink / Bone bands on a 1320px grid */
+:root{
+  --ink:#0C0C0B; --surface:#151513; --line:#2B2A26; --line-2:#3A3934; --hair:#22221F;
+  --bone:#F2F0EA; --bone-2:#E6E3DA; --bone-line:#CFCBBF; --bone-text:#4A4843; --bone-muted:#6A675F;
+  --text:#F2F0EA; --soft:#C9C6BC; --muted:#A8A59C; --dim:#6E6B63;
+  --signal:#FF5B1F; --signal-deep:#B23A0C; --err:#FF8A5C;
+  --f-display:'Archivo','Arial Narrow',Impact,sans-serif;
+  --f-body:'Instrument Sans',system-ui,-apple-system,'Segoe UI',sans-serif;
+  --f-mono:'JetBrains Mono',ui-monospace,'SFMono-Regular',Menlo,monospace;
+  --gutter:clamp(16px,4vw,40px);
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html{scroll-behavior:smooth;background:var(--ink)}
+body{background:var(--ink);color:var(--text);font-family:var(--f-body);font-size:17px;line-height:1.55;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{color:var(--text)}
+button{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--signal);outline-offset:3px}
+.wrap{width:100%;max-width:1320px;margin-inline:auto;padding-inline:var(--gutter)}
+.disp{font-family:var(--f-display);font-stretch:125%;font-weight:800;letter-spacing:-0.025em;line-height:.9;text-transform:uppercase;margin:0;text-wrap:balance}
+.h2{font-family:var(--f-display);font-stretch:112%;font-weight:700;letter-spacing:-0.02em;line-height:1.05;margin:0;text-wrap:balance}
+.mono{font-family:var(--f-mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase}
+.accent{color:var(--signal)}
+.muted{color:var(--muted)}
+p{margin:0;text-wrap:pretty}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:52px;padding:0 26px;border-radius:999px;font-weight:600;font-size:16px;text-decoration:none;border:1px solid transparent;cursor:pointer;transition:transform .2s ease,background .2s ease,color .2s ease,border-color .2s ease}
+.btn-a{background:var(--signal);color:var(--ink)}
+.btn-a:hover{background:var(--bone);color:var(--ink);transform:translateY(-2px)}
+.btn-a:disabled{opacity:.35;cursor:not-allowed;transform:none;background:var(--signal)}
+.btn-g{background:transparent;color:var(--text);border-color:var(--line-2)}
+.btn-g:hover{border-color:var(--text)}
+.btn-sm{min-height:44px;padding:0 20px;font-size:15px}
+.arrow{display:inline-flex;transition:transform .25s ease}
+a:hover .arrow,.card:hover .arrow{transform:translateX(5px)}
+
+/* header */
+.site-head{position:sticky;top:env(safe-area-inset-top,0px);z-index:50;background:rgba(12,12,11,.88);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid var(--hair)}
+.head-row{display:flex;align-items:center;justify-content:space-between;height:76px}
+.logo{display:flex;align-items:center;gap:8px;text-decoration:none;color:var(--text)}
+.logo .disp{font-size:30px}
+.logo i{width:9px;height:9px;background:var(--signal);border-radius:50%;margin-top:10px}
+.nav{display:flex;align-items:center;gap:32px}
+.navlink{color:var(--muted);text-decoration:none;font-size:15px;font-weight:500;padding:12px 2px;transition:color .2s}
+.navlink:hover,.navlink[aria-current="page"]{color:var(--text)}
+.burger{display:none}
+.mnav{border-top:1px solid var(--hair);padding:12px var(--gutter) 28px;display:flex;flex-direction:column;gap:4px;background:var(--ink)}
+.mnav .navlink{font-size:22px}
+@media (max-width:900px){.nav{display:none}.burger{display:inline-flex}}
+
+/* hero */
+.hero-video{position:relative;background:var(--ink);border-bottom:1px solid var(--hair)}
+.hero-video video{display:block;width:100%;max-width:100%;aspect-ratio:16/9;max-height:calc(100svh - 76px - 72px);object-fit:contain;background:var(--ink);margin-inline:auto}
+.vctl{position:absolute;left:0;right:0;bottom:0;display:flex;align-items:center;gap:14px;padding:16px var(--gutter);background:linear-gradient(to top,rgba(12,12,11,.85),rgba(12,12,11,0));opacity:0;transition:opacity .3s}
+.hero-video:hover .vctl,.hero-video:focus-within .vctl,.vctl.show{opacity:1}
+.vbtn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-width:44px;min-height:44px;padding:0 14px;border-radius:999px;background:rgba(12,12,11,.6);border:1px solid var(--line-2);color:var(--text);cursor:pointer;font-size:14px;font-weight:600}
+.vbtn:hover{border-color:var(--signal)}
+.vbtn.on{background:var(--signal);border-color:var(--signal);color:var(--ink)}
+.vbar{flex:1;height:3px;background:rgba(242,240,234,.18);border-radius:3px;overflow:hidden;cursor:pointer;min-width:40px}
+.vbar span{display:block;height:100%;width:0;background:var(--signal)}
+.vtime{color:var(--soft);font-variant-numeric:tabular-nums;white-space:nowrap}
+.hero-foot{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:28px;padding-block:48px 72px}
+.hero-foot .copy{display:flex;flex-direction:column;gap:18px;max-width:720px;min-width:0}
+.kicker{display:flex;align-items:center;gap:12px;color:var(--muted)}
+.kicker::before{content:"";width:28px;height:1px;background:var(--signal)}
+.ctas{display:flex;flex-wrap:wrap;gap:12px}
+
+/* sections */
+.band{padding-block:clamp(88px,10vw,140px)}
+.band-light{background:var(--bone);color:var(--ink)}
+.band-line{border-top:1px solid var(--hair)}
+.sec-head{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:24px;margin-bottom:56px}
+.sec-head .t{display:flex;flex-direction:column;gap:20px;max-width:860px;min-width:0}
+.sec-head .disp{font-size:clamp(44px,6vw,92px)}
+.sec-head p{max-width:400px;color:var(--muted)}
+.band-light .sec-head p{color:var(--bone-text)}
+.eyebrow{color:var(--signal)}
+.band-light .eyebrow{color:var(--signal-deep)}
+.stack{display:flex;flex-direction:column}
+.grid{display:grid;gap:16px}
+
+.marq-wrap{border-block:1px solid var(--hair);padding-block:36px;overflow:hidden}
+.marquee{display:flex;width:max-content;gap:72px;padding-right:72px;animation:marq 38s linear infinite}
+.marquee span{font-family:var(--f-display);font-stretch:112%;font-weight:700;font-size:clamp(28px,3vw,40px);white-space:nowrap;display:flex;align-items:center;gap:72px}
+.marquee span::after{content:"";width:8px;height:8px;border-radius:50%;background:var(--signal)}
+@keyframes marq{to{transform:translateX(-50%)}}
+
+.channels{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(190px,100%),1fr));gap:1px;background:var(--line);border:1px solid var(--line);border-radius:24px;overflow:hidden}
+.channel{background:var(--ink);text-decoration:none;color:var(--text);padding:32px 28px;display:flex;flex-direction:column;justify-content:space-between;gap:40px;min-height:220px;transition:background .25s}
+.channel:hover{background:var(--surface)}
+.channel:hover .disp{color:var(--signal)}
+.channel .disp{font-size:34px;transition:color .25s}
+
+.split{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(460px,100%),1fr));gap:16px}
+.panel{border-radius:28px;padding:clamp(28px,4vw,56px);display:flex;flex-direction:column;gap:28px;min-width:0}
+.panel-signal{background:var(--signal);color:var(--ink)}
+.panel-dark{background:var(--surface);border:1px solid var(--line)}
+.panel .disp{font-size:clamp(44px,5vw,76px)}
+.panel ul{list-style:none;margin:auto 0 0;padding:0;border-top:1px solid currentColor}
+.panel li{padding:14px 0;border-bottom:1px solid;font-weight:600}
+.panel-signal ul,.panel-signal li{border-color:rgba(12,12,11,.25)}
+.panel-dark ul,.panel-dark li{border-color:var(--line)}
+.panel li:last-child{border-bottom:0}
+
+.diag{display:flex;flex-wrap:wrap;gap:32px;align-items:stretch}
+.diag-opts{flex:1 1 400px;display:flex;flex-direction:column;gap:12px;min-width:0}
+.opt{display:flex;align-items:center;gap:18px;width:100%;text-align:left;background:transparent;border:1px solid var(--line);border-radius:16px;padding:18px 22px;color:var(--muted);font-size:17px;cursor:pointer;transition:all .2s ease;min-height:64px}
+.opt:hover{border-color:#5A584F;color:var(--text)}
+.opt[aria-pressed="true"]{background:var(--bone);color:var(--ink);border-color:var(--bone)}
+.opt .mono{opacity:.6}
+.diag-out{flex:999 1 520px;min-width:0;background:var(--surface);border:1px solid var(--line);border-radius:28px;padding:clamp(28px,4vw,56px);display:flex;flex-direction:column;gap:28px}
+.chips{display:flex;flex-wrap:wrap;gap:10px}
+.chip{border:1px solid var(--line-2);border-radius:999px;padding:9px 14px;color:var(--soft)}
+.fade-in{animation:fadeIn .45s cubic-bezier(.2,.7,.2,1)}
+@keyframes fadeIn{from{opacity:.2;transform:translateY(10px)}to{opacity:1;transform:none}}
+
+.tabs{display:flex;flex-wrap:wrap;gap:16px}
+.tab{flex:1 1 220px;text-align:left;background:var(--bone-2);border:1px solid var(--bone-line);border-radius:20px;padding:28px;color:var(--ink);cursor:pointer;display:flex;flex-direction:column;gap:14px;transition:all .25s ease}
+.tab:hover{border-color:var(--ink)}
+.tab[aria-selected="true"]{background:var(--ink);color:var(--bone);border-color:var(--ink)}
+.tab .disp{font-size:clamp(40px,4vw,52px)}
+.tab .mono{opacity:.7}
+.stage-detail{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(300px,100%),1fr));gap:40px;border-top:1px solid var(--bone-line);padding-top:40px;margin-top:40px}
+.stage-detail .mono{color:var(--bone-muted)}
+.stage-detail p{font-size:20px;margin-top:12px}
+.always{display:flex;flex-wrap:wrap;align-items:center;gap:20px;background:var(--ink);color:var(--bone);border-radius:20px;padding:24px 28px;margin-top:40px}
+.always span:last-child{flex:1 1 360px;min-width:0}
+
+.card{transition:border-color .25s ease,transform .25s ease}
+.card:hover{border-color:var(--signal);transform:translateY(-4px)}
+.svc-card{text-decoration:none;color:var(--text);background:var(--surface);border:1px solid var(--line);border-radius:24px;padding:32px;display:flex;flex-direction:column;gap:18px;min-height:300px}
+.svc-card .h2{font-size:30px}
+.svc-card p{color:var(--muted)}
+.svc-card .arrow{margin-top:auto}
+
+.ph{background-color:var(--surface);background-image:repeating-linear-gradient(135deg,rgba(242,240,234,.04) 0 1px,transparent 1px 14px)}
+.work-card{text-decoration:none;color:var(--text);border:1px solid var(--line);border-radius:28px;overflow:hidden;background:var(--surface);display:flex;flex-direction:column}
+.work-card .img{aspect-ratio:4/3;max-width:100%;display:flex;align-items:flex-end;justify-content:space-between;gap:12px;padding:24px}
+.work-card .body{padding:32px;display:flex;flex-direction:column;gap:14px}
+.tag{background:var(--signal);color:var(--ink);padding:8px 12px;border-radius:999px}
+.poster-mini{background:var(--signal);color:var(--ink);flex-direction:column;align-items:flex-start!important;justify-content:space-between!important;padding:32px!important}
+
+.rows .row{display:flex;gap:28px;padding:28px 0;border-bottom:1px solid var(--line)}
+.rows .row .mono{color:var(--signal);padding-top:6px}
+
+.quote{background:var(--surface);border:1px solid var(--line);border-radius:32px;padding:clamp(32px,6vw,88px);display:flex;flex-direction:column;gap:40px;margin:0}
+.quote blockquote{margin:0;font-size:clamp(28px,3.4vw,52px)}
+
+.faq{border-top:1px solid var(--line)}
+.faq-item{border-bottom:1px solid var(--line)}
+.faq-q{display:flex;justify-content:space-between;align-items:center;gap:24px;width:100%;background:none;border:0;font-size:21px;font-weight:500;text-align:left;padding:28px 0;cursor:pointer;min-height:44px}
+.faq-q:hover{color:var(--signal)}
+.faq-q .mono{font-size:22px;color:var(--signal);width:24px;text-align:center}
+.faq-a{padding:0 48px 28px 0;color:var(--muted);font-size:18px}
+
+/* page heroes */
+.page-hero{padding-block:96px 96px;display:flex;flex-direction:column;gap:36px}
+.page-hero .disp{font-size:clamp(52px,9vw,150px)}
+.page-hero p{max-width:640px;font-size:clamp(18px,1.6vw,22px);color:var(--soft)}
+
+/* services explorer */
+.explorer{display:flex;flex-wrap:wrap;gap:56px;align-items:flex-start}
+.svc-list{flex:1 1 340px;display:flex;flex-direction:column;border-top:1px solid var(--line);min-width:0}
+.svc{display:flex;align-items:center;justify-content:space-between;gap:16px;width:100%;background:none;border:0;border-bottom:1px solid var(--line);color:var(--dim);text-align:left;padding:20px 0;cursor:pointer;transition:color .2s;min-height:44px}
+.svc:hover,.svc[aria-selected="true"]{color:var(--text)}
+.svc .dot{width:12px;height:12px;border-radius:50%;border:1px solid currentColor;flex:none}
+.svc[aria-selected="true"] .dot{background:var(--signal);border-color:var(--signal)}
+.svc .h2{font-size:clamp(22px,2vw,30px)}
+.svc-panel{flex:999 1 560px;min-width:0;background:var(--surface);border:1px solid var(--line);border-radius:28px;overflow:hidden}
+.svc-panel .img{aspect-ratio:16/7;max-width:100%;display:flex;align-items:flex-end;justify-content:space-between;padding:24px;border-bottom:1px solid var(--line)}
+.svc-panel .in{padding:clamp(28px,4vw,52px);display:flex;flex-direction:column;gap:36px}
+.svc-panel .disp{font-size:clamp(38px,4.4vw,64px)}
+.two{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(260px,100%),1fr));gap:40px}
+.check{display:flex;gap:14px;align-items:flex-start;border-top:1px solid var(--line);padding-top:14px}
+.check svg{flex:none;margin-top:4px}
+.steps{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(250px,100%),1fr));border-top:2px solid var(--ink)}
+.steps li{padding:32px 28px 8px 0;display:flex;flex-direction:column;gap:14px}
+.steps .disp{font-size:72px;color:var(--signal)}
+.steps .h2{font-size:28px}
+.steps p{color:var(--bone-text)}
+.steps .mono{color:var(--bone-muted)}
+.seg{display:inline-flex;gap:4px;padding:4px;border:1px solid var(--line);border-radius:999px}
+.seg button{background:none;border:0;border-radius:999px;color:var(--muted);font-weight:600;font-size:15px;padding:0 22px;min-height:46px;cursor:pointer}
+.seg button:hover{color:var(--text)}
+.seg button[aria-pressed="true"]{background:var(--bone);color:var(--ink)}
+.plan{border-radius:28px;padding:36px;display:flex;flex-direction:column;gap:22px;border:1px solid var(--line);background:var(--surface);color:var(--text)}
+.plan.feat{background:var(--bone);color:var(--ink);border-color:var(--bone)}
+.plan .price{display:flex;align-items:baseline;gap:8px}
+.plan .price .disp{font-size:56px}
+.plan ul{list-style:none;margin:0;padding:20px 0 0;border-top:1px solid var(--line);display:flex;flex-direction:column;gap:10px}
+.plan.feat ul{border-color:var(--bone-line)}
+.plan li{display:flex;gap:12px}
+.plan li svg{flex:none;margin-top:5px}
+.plan .btn{margin-top:auto}
+.plan.feat .btn-g{border-color:var(--ink);color:var(--ink)}
+.badge{background:var(--ink);color:var(--bone);border-radius:999px;padding:7px 12px}
+
+/* work */
+.filters{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:40px}
+.filter{background:transparent;border:1px solid var(--line-2);border-radius:999px;color:var(--soft);font-size:15px;font-weight:500;padding:0 20px;min-height:44px;cursor:pointer;display:inline-flex;align-items:center;gap:10px;transition:all .2s}
+.filter:hover{border-color:var(--text);color:var(--text)}
+.filter[aria-pressed="true"]{background:var(--signal);border-color:var(--signal);color:var(--ink)}
+.cases{display:flex;flex-wrap:wrap;gap:48px;align-items:flex-start}
+.case-list{flex:1 1 400px;min-width:0;border-top:1px solid var(--line)}
+.case-row{display:grid;grid-template-columns:48px minmax(0,1fr) auto;align-items:center;gap:18px;width:100%;background:none;border:0;border-bottom:1px solid var(--line);text-align:left;padding:24px 8px;cursor:pointer;transition:background .2s,padding .2s;min-height:44px}
+.case-row:hover,.case-row[aria-pressed="true"]{background:var(--surface);padding-left:16px}
+.case-row[aria-pressed="true"] .arrow{color:var(--signal);transform:translateX(4px)}
+.case-row .h2{font-size:clamp(20px,2vw,27px)}
+.case-row small{color:var(--muted);font-size:15px}
+.case-panel{flex:999 1 560px;min-width:0;background:var(--surface);border:1px solid var(--line);border-radius:28px;overflow:hidden}
+.case-panel .img{aspect-ratio:16/9;max-width:100%;display:flex;align-items:flex-end;justify-content:space-between;gap:12px;padding:24px;border-bottom:1px solid var(--line)}
+.case-panel .in{padding:clamp(28px,4vw,52px);display:flex;flex-direction:column;gap:32px}
+.case-panel .disp{font-size:clamp(34px,3.8vw,58px)}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(150px,100%),1fr));gap:1px;background:var(--line);border:1px solid var(--line);border-radius:18px;overflow:hidden}
+.stats div{background:var(--ink);padding:22px;display:flex;flex-direction:column;gap:8px}
+.stats .disp{font-size:38px}
+.pill-dark{background:var(--ink);border:1px solid var(--line-2);padding:7px 12px;border-radius:999px}
+
+/* about */
+.rules{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(260px,100%),1fr));border-top:2px solid var(--ink)}
+.rules div{padding:32px 32px 8px 0;display:flex;flex-direction:column;gap:14px}
+.rules .h2{font-size:30px}
+.rules p{color:var(--bone-text)}
+.team{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(300px,100%),1fr));gap:16px;align-items:start}
+.person{display:flex;flex-direction:column;width:100%;background:var(--surface);border:1px solid var(--line);border-radius:24px;overflow:hidden;text-align:left;padding:0;cursor:pointer;transition:border-color .25s,transform .25s}
+.person:hover{border-color:#5A584F;transform:translateY(-4px)}
+.person[aria-expanded="true"]{border-color:var(--signal)}
+.person .ph{aspect-ratio:1/1;width:100%;display:flex;align-items:flex-end;padding:20px;border-bottom:1px solid var(--line)}
+.person .in{padding:24px;display:flex;flex-direction:column;gap:8px;width:100%}
+.route{overflow-x:auto;padding-bottom:8px}
+.route-in{position:relative;display:flex;justify-content:space-between;min-width:760px;padding-top:4px}
+.route-in::before{content:"";position:absolute;left:24px;right:24px;top:21px;height:2px;background:var(--line)}
+.stop{position:relative;display:flex;flex-direction:column;align-items:center;gap:14px;background:none;border:0;color:var(--muted);cursor:pointer;padding:8px 4px;min-height:44px}
+.stop:hover,.stop[aria-pressed="true"]{color:var(--text)}
+.stop .pin{width:18px;height:18px;border-radius:50%;background:var(--ink);border:2px solid #5A584F;transition:all .2s}
+.stop[aria-pressed="true"] .pin{background:var(--signal);border-color:var(--signal);box-shadow:0 0 0 8px rgba(255,91,31,.18)}
+
+/* contact */
+.contact{display:flex;flex-wrap:wrap;gap:64px;align-items:flex-start;padding-block:96px 140px}
+.contact-l{flex:1 1 380px;min-width:0;display:flex;flex-direction:column;gap:48px}
+.contact-l .disp{font-size:clamp(48px,6.4vw,100px)}
+.clink{display:flex;justify-content:space-between;align-items:center;gap:16px;padding:22px 0;border-bottom:1px solid var(--line)}
+.clink .h2{font-size:24px;user-select:all}
+.form-card{flex:999 1 560px;min-width:0;background:var(--surface);border:1px solid var(--line);border-radius:28px;overflow:hidden}
+.prog{height:4px;background:var(--hair)}.prog span{display:block;height:100%;background:var(--signal);transition:width .4s ease}
+.form-in{padding:clamp(24px,4vw,52px)}
+.form-in form{display:flex;flex-direction:column;gap:28px}
+.form-in .h2{font-size:clamp(28px,3vw,40px)}
+.picks{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(220px,100%),1fr));gap:10px}
+.pick{display:flex;align-items:center;justify-content:space-between;gap:14px;background:var(--ink);border:1px solid var(--line);border-radius:16px;color:var(--soft);font-size:17px;font-weight:500;text-align:left;padding:16px 20px;min-height:60px;cursor:pointer;transition:all .2s}
+.pick:hover{border-color:#5A584F;color:var(--text)}
+.pick[aria-pressed="true"],.pick[aria-checked="true"]{border-color:var(--signal);color:var(--text);background:#1D130E}
+.box{width:22px;height:22px;border-radius:6px;border:1.5px solid #5A584F;flex:none;display:flex;align-items:center;justify-content:center;color:var(--ink)}
+.pick[aria-pressed="true"] .box{background:var(--signal);border-color:var(--signal)}
+.fields{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(240px,100%),1fr));gap:18px}
+.field{display:flex;flex-direction:column;gap:8px;min-width:0}
+.field label{font-size:14px;font-weight:600;color:var(--soft)}
+.inp{width:100%;background:var(--ink);border:1px solid var(--line);border-radius:14px;color:var(--text);font:inherit;font-size:17px;padding:14px 18px;min-height:54px}
+.inp::placeholder{color:var(--dim)}
+.inp:focus{outline:none;border-color:var(--signal)}
+.err{color:var(--err);font-weight:500}
+.form-nav{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px}
+.summary{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(170px,100%),1fr));gap:1px;background:var(--line);border:1px solid var(--line);border-radius:18px;overflow:hidden}
+.summary div{background:var(--ink);padding:20px;display:flex;flex-direction:column;gap:6px;min-width:0}
+
+/* footer */
+.foot{border-top:1px solid var(--hair);padding-top:112px;overflow:hidden}
+.foot-cta{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:32px;margin-bottom:88px}
+.foot-cta .disp{font-size:clamp(52px,8vw,128px)}
+.foot-main{display:flex;flex-wrap:wrap;gap:64px;border-top:1px solid var(--hair);padding-top:64px}
+.foot-brand{flex:1 1 340px;min-width:0;max-width:460px;display:flex;flex-direction:column;gap:24px}
+.foot-cols{flex:999 1 540px;min-width:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(170px,100%),1fr));gap:40px}
+.foot-cols nav,.foot-cols address{display:flex;flex-direction:column;gap:12px;font-style:normal}
+.foot-cols .mono{color:var(--dim);margin-bottom:6px}
+.flink{color:var(--muted);text-decoration:none;transition:color .2s}
+a.flink:hover{color:var(--signal)}
+.nl{position:relative;display:flex;gap:8px;background:var(--surface);border:1px solid var(--line);border-radius:999px;padding:6px}
+.nl:focus-within{border-color:var(--signal)}
+.nl input{flex:1;min-width:0;background:none;border:0;color:var(--text);font:inherit;font-size:16px;padding:0 16px;min-height:44px;outline:none}
+.nl input::placeholder{color:var(--dim)}
+.soc-row{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:20px;border-top:1px solid var(--hair);padding-top:32px;margin-top:56px}
+.soc{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--line-2);border-radius:999px;padding:0 18px;min-height:44px;color:var(--soft);text-decoration:none;font-size:15px;background:none;cursor:pointer;transition:border-color .2s,color .2s}
+.soc:hover{border-color:var(--signal);color:var(--text)}
+.giant{font-size:clamp(120px,30vw,460px);line-height:.74;color:var(--surface);text-align:center;margin-top:72px;white-space:nowrap;user-select:none}
+.giant span{color:#2A140A}
+.legal{background:#080807;border-top:1px solid #1A1A18;padding-block:24px}
+.legal .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px 24px;color:var(--dim)}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+@media (max-width:600px){
+  .hero-foot{padding-block:32px 56px}
+  .vctl{opacity:1;position:static;background:none;padding-block:10px}
+  .vtime{display:none}
+  .faq-a{padding-right:0}
+}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .marquee,.fade-in{animation:none}
+  *{transition:none!important}
+}
+</style>
+</head>
+<body style="margin:0">
+
+<div id="top"></div>
+<header class="site-head">
+  <div class="wrap head-row">
+    <a class="logo" href="#home" aria-label="RPM home"><span class="disp">RPM</span><i></i></a>
+    <nav class="nav" aria-label="Primary">
+      <a class="navlink" href="#services">Services</a>
+      <a class="navlink" href="#work">Work</a>
+      <a class="navlink" href="#about">About</a>
+      <a class="navlink" href="#contact">Contact</a>
+      <a class="btn btn-a btn-sm" href="#contact">Start a project</a>
+    </nav>
+    <button class="burger btn btn-g btn-sm" id="burger" aria-expanded="false" aria-controls="mnav">Menu</button>
+  </div>
+  <nav class="mnav" id="mnav" aria-label="Mobile" hidden>
+    <a class="navlink" href="#services">Services</a>
+    <a class="navlink" href="#work">Work</a>
+    <a class="navlink" href="#about">About</a>
+    <a class="navlink" href="#contact">Contact</a>
+    <a class="btn btn-a" href="#contact" style="margin-top:12px">Start a project</a>
+  </nav>
+</header>
+
+<main>
+<!-- ================= HOME ================= -->
+<div data-page="home">
+  <section class="hero" aria-label="Showreel">
+    <div class="hero-video" id="heroVideo">
+      <video id="reel" src="brag.mp4" poster="brag.jpg" autoplay muted loop playsinline preload="auto" aria-label="RPM showreel: More people through the door. TV, radio, direct mail, press and digital for retail."></video>
+      <div class="vctl" id="vctl">
+        <button class="vbtn" id="vplay" aria-label="Pause showreel">
+          <svg id="icoPause" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><rect x="6" y="5" width="4" height="14"></rect><rect x="14" y="5" width="4" height="14"></rect></svg>
+          <svg id="icoPlay" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" hidden><path d="M7 4.5v15l13-7.5z"></path></svg>
+        </button>
+        <div class="vbar" id="vbar" role="presentation"><span id="vprog"></span></div>
+        <span class="mono vtime" id="vtime">0:00 / 0:21</span>
+        <button class="vbtn" id="vsound" aria-pressed="false">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9z"></path><path id="waves" d="M16 9a4 4 0 0 1 0 6M19 6a8 8 0 0 1 0 12" hidden></path><path id="mutex" d="M16 9l5 6M21 9l-5 6"></path></svg>
+          <span id="vsoundL">Sound on</span>
+        </button>
+      </div>
+    </div>
+    <div class="wrap hero-foot">
+      <div class="copy">
+        <span class="mono kicker">Media &amp; advertising for retail · Furniture specialists</span>
+        <h1 class="h2" style="font-size:clamp(30px,3.6vw,52px)">TV, radio, direct mail, press and digital, planned, made and bought as one campaign.</h1>
+      </div>
+      <div class="ctas">
+        <a class="btn btn-a" href="#contact">Start a project <span class="arrow"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"></path></svg></span></a>
+        <a class="btn btn-g" href="#work">See the work</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="marq-wrap" aria-label="Clients">
+    <div class="wrap mono muted" style="margin-bottom:24px">Trusted by retailers from Kenilworth to Fraserburgh</div>
+    <div class="marquee" id="marquee"></div>
+  </section>
+
+  <section class="band" style="padding-bottom:0">
+    <div class="wrap">
+      <div class="sec-head">
+        <div class="t"><span class="mono eyebrow">Full-service media</span><h2 class="disp">Every channel.<br>One campaign.</h2></div>
+        <p>One team plans it, makes it and buys it. One message wherever your customers see or hear it.</p>
+      </div>
+      <div class="channels" id="channels"></div>
+    </div>
+  </section>
+
+  <section class="band" style="padding-bottom:0">
+    <div class="wrap split">
+      <div class="panel panel-signal">
+        <span class="mono">Our specialism</span>
+        <h2 class="disp">Furniture &amp; home</h2>
+        <p style="font-size:19px;max-width:480px">We know the trade: long buying cycles, brand-led ranges, customers who want to sit on it first, and sale events that make or break the year.</p>
+        <ul><li>Sale, clearance and preview events</li><li>Brand and range campaigns</li><li>Single stores to multi-showroom groups</li></ul>
+      </div>
+      <div class="panel panel-dark">
+        <span class="mono muted">Our world</span>
+        <h2 class="disp">Retail</h2>
+        <p style="font-size:19px;max-width:480px;color:var(--soft)">The same thinking works for any store that needs people through the door. If you sell from a shop floor, we can help.</p>
+        <ul><li>Independent retailers</li><li>Multi-site and regional chains</li><li>Showrooms and destination stores</li></ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="band">
+    <div class="wrap">
+      <div class="sec-head">
+        <div class="t"><span class="mono eyebrow">Diagnose</span><h2 class="disp">Where's it breaking?</h2></div>
+        <p>Pick the one that sounds most like you. Most retailers we meet have one of these four problems.</p>
+      </div>
+      <div class="diag">
+        <div class="diag-opts" role="group" aria-label="Choose a problem" id="probOpts"></div>
+        <div class="diag-out" id="probOut" aria-live="polite"></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="band band-light">
+    <div class="wrap">
+      <div class="sec-head">
+        <div class="t"><span class="mono eyebrow">The system</span><h2 class="disp">Cold. Warm.<br>Through the door.</h2></div>
+        <p>Every channel has a job. TV, radio, mail and digital run as one joined-up campaign, not five suppliers doing their own thing.</p>
+      </div>
+      <div class="tabs" role="tablist" aria-label="Funnel stages" id="stageTabs"></div>
+      <div class="stage-detail" id="stageDetail" role="tabpanel"></div>
+      <div class="always"><span class="mono accent">Always on</span><span>Your customer list put to work in mail, email, SMS and custom audiences, so past customers hear about the event first.</span></div>
+    </div>
+  </section>
+
+  <section class="band">
+    <div class="wrap">
+      <div class="sec-head">
+        <div class="t"><span class="mono eyebrow">What we do</span><h2 class="disp">Services</h2></div>
+        <a class="btn btn-g" href="#services">All services</a>
+      </div>
+      <div class="grid" id="homeSvcs" style="grid-template-columns:repeat(auto-fit,minmax(min(360px,100%),1fr))"></div>
+    </div>
+  </section>
+
+  <section class="band" style="padding-top:0">
+    <div class="wrap">
+      <div class="sec-head">
+        <div class="t"><span class="mono eyebrow">Work</span><h2 class="disp">Recent campaigns</h2></div>
+        <a class="btn btn-g" href="#work">All work</a>
+      </div>
+      <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(min(420px,100%),1fr));gap:24px">
+        <a class="work-card card" href="#work" data-case="0">
+          <div class="img poster-mini"><span class="mono">Followers-only preview</span><span class="disp" style="font-size:clamp(48px,6vw,88px)">Up to<br>70% off</span><span style="font-weight:600">Famous brands. Two stores.</span></div>
+          <div class="body"><span class="mono muted">G&amp;W Furniture · Worcester &amp; Gloucester</span><span class="h2" style="font-size:34px">The £1,075,489 Clearance Event</span><p class="muted">Followers-only preview, eight cold creatives, cold, retarget and call campaigns, plus a full-page press ad and display banners.</p></div>
+        </a>
+        <a class="work-card card" href="#work" data-case="1">
+          <div class="img ph"><span class="mono muted">[CAMPAIGN IMAGE]</span><span class="mono tag">Event</span></div>
+          <div class="body"><span class="mono muted">Thomas Hearn · Kenilworth</span><span class="h2" style="font-size:34px">Stock Sale Event, up to 70% off</span><p class="muted">Product-level creatives carrying live stock counts, built around "when it's gone, it's gone".</p></div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="band band-line">
+    <div class="wrap split" style="gap:64px;align-items:start">
+      <div class="stack" style="gap:24px">
+        <span class="mono eyebrow">How you pay</span>
+        <h2 class="disp" style="font-size:clamp(44px,5.4vw,84px)">One monthly fee. Everything handled.</h2>
+        <p style="font-size:19px;color:var(--soft);max-width:520px">Planning, creative, media buying and reporting across every channel under one retainer. No surprise invoices, no chasing five suppliers.</p>
+        <a class="btn btn-a" href="#services" data-goto="pricing" style="align-self:flex-start">See retainers</a>
+      </div>
+      <div class="rows" id="retainRows"></div>
+    </div>
+  </section>
+
+  <section class="band" style="padding-top:0">
+    <div class="wrap">
+      <figure class="quote">
+        <svg width="56" height="44" viewBox="0 0 56 44" fill="#FF5B1F" aria-hidden="true"><path d="M0 44V26C0 11 8 2 22 0l2 6C15 9 12 15 12 22h11v22zm32 0V26C32 11 40 2 54 0l2 6c-9 3-12 9-12 16h11v22z"></path></svg>
+        <blockquote class="h2">[CLIENT QUOTE: one or two sentences on footfall or sales after working with RPM.]</blockquote>
+        <figcaption style="display:flex;align-items:center;gap:16px"><span class="ph" style="width:56px;height:56px;border-radius:50%;border:1px solid var(--line)"></span><span class="stack"><strong>[NAME]</strong><span class="mono muted">[ROLE], [CLIENT]</span></span></figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section class="band" style="padding-top:0">
+    <div class="wrap split" style="gap:64px;align-items:start">
+      <div class="stack" style="gap:20px"><span class="mono eyebrow">Questions</span><h2 class="disp" style="font-size:clamp(44px,5vw,80px)">Straight answers</h2></div>
+      <div class="faq" id="faq"></div>
+    </div>
+  </section>
+</div>
+
+<!-- ================= SERVICES ================= -->
+<div data-page="services" hidden>
+  <section class="wrap page-hero">
+    <span class="mono kicker">Services</span>
+    <h1 class="disp">Everything it takes to get people <span class="accent">in.</span></h1>
+    <p>TV, radio, direct mail, press and digital, planned together, made in-house and bought for you. Take one channel, or hand us the whole campaign.</p>
+  </section>
+  <section class="wrap" style="padding-bottom:140px">
+    <div class="explorer">
+      <div class="svc-list" role="tablist" aria-label="Services" id="svcList"></div>
+      <div class="svc-panel" role="tabpanel" id="svcPanel" aria-live="polite"></div>
+    </div>
+  </section>
+  <section class="band band-light">
+    <div class="wrap">
+      <div class="sec-head">
+        <div class="t"><span class="mono eyebrow">How we work</span><h2 class="disp">Four steps.<br>No mystery.</h2></div>
+        <p>From first call to first report, you always know what's happening and why.</p>
+      </div>
+      <ol class="steps" id="steps"></ol>
+    </div>
+  </section>
+  <section class="band" id="pricing">
+    <div class="wrap">
+      <div class="sec-head">
+        <div class="t"><span class="mono eyebrow">Pricing</span><h2 class="disp">Pick how you work with us</h2></div>
+        <div class="seg" role="group" aria-label="Pricing type"><button id="segRet" aria-pressed="true">Monthly retainers</button><button id="segProj" aria-pressed="false">One-off projects</button></div>
+      </div>
+      <div class="grid" id="plans" style="grid-template-columns:repeat(auto-fit,minmax(min(320px,100%),1fr))"></div>
+      <p class="mono muted" style="margin-top:28px">Prices exclude VAT · Media costs (airtime, print, postage, ad spend) [BILLING TERMS] · [MINIMUM TERM]</p>
+    </div>
+  </section>
+</div>
+
+<!-- ================= WORK ================= -->
+<div data-page="work" hidden>
+  <section class="wrap page-hero">
+    <span class="mono kicker">Work</span>
+    <h1 class="disp">Campaigns that <span class="accent">moved stock.</span></h1>
+    <p>TV, radio, mail, press and digital for retailers from Kenilworth to Fraserburgh. Pick a project to see what we did.</p>
+  </section>
+  <section class="wrap" style="padding-bottom:140px">
+    <div class="filters" role="group" aria-label="Filter work" id="filters"></div>
+    <div class="cases">
+      <div class="case-list" id="caseList"></div>
+      <article class="case-panel" id="casePanel" aria-live="polite"></article>
+    </div>
+  </section>
+</div>
+
+<!-- ================= ABOUT ================= -->
+<div data-page="about" hidden>
+  <section class="wrap page-hero">
+    <span class="mono kicker">About RPM</span>
+    <h1 class="disp">A small team that <span class="accent">answers the phone.</span></h1>
+  </section>
+  <section class="wrap split" style="gap:64px;align-items:center;padding-bottom:140px">
+    <div class="ph" style="aspect-ratio:4/5;max-width:100%;border-radius:28px;border:1px solid var(--line);display:flex;align-items:flex-end;padding:24px"><span class="mono muted">[TEAM PHOTO, in a client showroom]</span></div>
+    <div class="stack" style="gap:28px">
+      <span class="mono eyebrow">Our story</span>
+      <p class="h2" style="font-size:clamp(26px,2.8vw,40px)">Russell Pike Media &amp; Advertising started with one idea: retailers deserve marketing that brings people through the door, not just numbers on a dashboard.</p>
+      <p style="font-size:19px;color:var(--soft)">Founded by Russell Pike in [YEAR], RPM plans, makes and buys TV, radio, direct mail, press and digital campaigns for retailers across England and Scotland. Furniture is our specialism. Many of our clients are family-run stores trading for generations, and we spend a lot of time in their showrooms, because that's where the story is.</p>
+      <p style="font-size:19px;color:var(--soft)">We stay small on purpose. The people you meet are the people who run your account.</p>
+    </div>
+  </section>
+  <section class="band band-light">
+    <div class="wrap">
+      <div class="sec-head"><div class="t"><span class="mono eyebrow">What we believe</span><h2 class="disp">Four rules we<br>don't break</h2></div></div>
+      <div class="rules" id="rules"></div>
+    </div>
+  </section>
+  <section class="band">
+    <div class="wrap">
+      <div class="sec-head"><div class="t"><span class="mono eyebrow">The team</span><h2 class="disp">Who you'll work with</h2></div><p>Tap a person to read more.</p></div>
+      <div class="team" id="team"></div>
+    </div>
+  </section>
+  <section class="band band-line">
+    <div class="wrap">
+      <div class="sec-head"><div class="t"><span class="mono eyebrow">Where we work</span><h2 class="disp">Kenilworth to<br>Fraserburgh</h2></div><p>Stores we run campaigns for, south to north. Tap a town.</p></div>
+      <div class="route"><div class="route-in" role="group" aria-label="Client locations" id="route"></div></div>
+      <div class="panel panel-dark" style="margin-top:48px;flex-direction:row;flex-wrap:wrap;justify-content:space-between;align-items:flex-end" id="townOut" aria-live="polite"></div>
+    </div>
+  </section>
+</div>
+
+<!-- ================= CONTACT ================= -->
+<div data-page="contact" hidden>
+  <section class="wrap contact">
+    <div class="contact-l">
+      <div class="stack" style="gap:28px">
+        <span class="mono kicker">Start a project</span>
+        <h1 class="disp">Tell us where it's <span class="accent">breaking.</span></h1>
+        <p style="font-size:19px;color:var(--soft);max-width:460px">Two minutes, three steps. We'll come back within one working day with honest thoughts, even if that's "you don't need us yet".</p>
+      </div>
+      <div style="border-top:1px solid var(--line)">
+        <div class="clink"><span class="stack" style="gap:4px"><span class="mono muted">Call</span><span class="h2">[PHONE NUMBER]</span></span></div>
+        <div class="clink"><span class="stack" style="gap:4px"><span class="mono muted">Email</span><span class="h2">[EMAIL ADDRESS]</span></span></div>
+        <div class="clink"><span class="stack" style="gap:4px"><span class="mono muted">Visit</span><span class="h2">[OFFICE ADDRESS]</span></span></div>
+      </div>
+      <div class="stack" style="gap:16px">
+        <span class="mono muted">What happens next</span>
+        <div style="display:flex;gap:18px"><span class="mono accent">01</span><span style="color:var(--soft)">We read it properly and look at your current advertising.</span></div>
+        <div style="display:flex;gap:18px"><span class="mono accent">02</span><span style="color:var(--soft)">A 20-minute call to understand the stores and the goal.</span></div>
+        <div style="display:flex;gap:18px"><span class="mono accent">03</span><span style="color:var(--soft)">A clear plan and price. No pressure, no jargon.</span></div>
+      </div>
+    </div>
+    <div class="form-card">
+      <div class="prog"><span id="prog" style="width:25%"></span></div>
+      <div class="form-in" id="formIn"></div>
+    </div>
+  </section>
+</div>
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <div class="foot-cta" id="footCta">
+      <h2 class="disp">Let's fill your <span class="accent">store.</span></h2>
+      <a class="btn btn-a" href="#contact">Start a project</a>
+    </div>
+    <div class="foot-main">
+      <div class="foot-brand">
+        <a class="logo" href="#home" aria-label="RPM home"><span class="disp" style="font-size:40px">RPM<span class="accent">.</span></span></a>
+        <p class="muted">TV, radio, direct mail, press and digital advertising that brings people through the door. Retail specialists.</p>
+        <div class="stack" style="gap:12px">
+          <span class="mono">Monthly notes</span>
+          <span class="muted" style="font-size:15px">One email a month on what's working in retail advertising.</span>
+          <form class="nl" id="nlForm" novalidate>
+            <label for="nlEmail" class="sr">Email address</label>
+            <input id="nlEmail" type="email" autocomplete="email" placeholder="you@yourstore.co.uk">
+            <button class="btn btn-a btn-sm" type="submit">Subscribe</button>
+          </form>
+          <span class="err" id="nlErr" role="alert" hidden></span>
+          <div id="nlDone" role="status" hidden style="display:flex;align-items:center;gap:12px;border:1px solid var(--line);border-radius:999px;padding:12px 18px"><svg width="18" height="18" viewBox="0 0 16 16" fill="none" stroke="#FF5B1F" stroke-width="2" aria-hidden="true"><path d="M3 8.5l3.2 3L13 4.5"></path></svg><span>You're on the list. (Demo: nothing was sent.)</span></div>
+        </div>
+      </div>
+      <div class="foot-cols">
+        <nav aria-label="Company"><span class="mono">Company</span><a class="flink" href="#home">Home</a><a class="flink" href="#services">Services</a><a class="flink" href="#work">Work</a><a class="flink" href="#about">About</a><a class="flink" href="#contact">Contact</a></nav>
+        <nav aria-label="Services"><span class="mono">Services</span><a class="flink" href="#services" data-svc="1">TV advertising</a><a class="flink" href="#services" data-svc="2">Radio</a><a class="flink" href="#services" data-svc="3">Direct mail</a><a class="flink" href="#services" data-svc="4">Press &amp; print</a><a class="flink" href="#services" data-svc="5">Digital &amp; social</a><a class="flink" href="#services" data-svc="0">Sale &amp; event campaigns</a></nav>
+        <address><span class="mono">Get in touch</span><span class="flink">[PHONE NUMBER]</span><span class="flink">[EMAIL ADDRESS]</span><span class="flink">[OFFICE ADDRESS]<br>[TOWN, POSTCODE]</span><span class="flink">Mon–Fri · [OPENING HOURS]</span></address>
+      </div>
+    </div>
+    <div class="soc-row">
+      <div style="display:flex;flex-wrap:wrap;gap:10px"><span class="soc">Instagram</span><span class="soc">Facebook</span><span class="soc">LinkedIn</span></div>
+      <button class="soc" id="toTop">Back to top <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M6 10V2M2.5 5.5L6 2l3.5 3.5"></path></svg></button>
+    </div>
+  </div>
+  <div class="disp giant" aria-hidden="true">RPM<span>.</span></div>
+  <div class="legal"><div class="wrap mono"><span>© 2026 RPM Group, trading as Russell Pike Media &amp; Advertising · Registered in England &amp; Wales [COMPANY NO] · VAT [VAT NO]</span><span style="display:flex;gap:24px"><span>Privacy</span><span>Terms</span><span>Cookies</span></span></div></div>
+</footer>
+
+<script>
+(function(){
+const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const ARROW='<svg width="18" height="18" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"></path></svg>';
+const TICK='<svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M3 8.5l3.2 3L13 4.5"></path></svg>';
+const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+/* ---------- router ---------- */
+const pages=['home','services','work','about','contact'];
+let pendingSvc=null, pendingCase=null, pendingAnchor=null;
+function route(){
+  let h=location.hash.replace('#','')||'home'; if(!pages.includes(h)) h='home';
+  $$('[data-page]').forEach(p=>p.hidden=p.dataset.page!==h);
+  $$('.navlink').forEach(a=>a.getAttribute('href')==='#'+h?a.setAttribute('aria-current','page'):a.removeAttribute('aria-current'));
+  $('#footCta').hidden = h==='contact';
+  $('#mnav').hidden=true; $('#burger').setAttribute('aria-expanded','false'); $('#burger').textContent='Menu';
+  if(pendingSvc!==null){svcSel=pendingSvc;renderSvc();pendingSvc=null}
+  if(pendingCase!==null){filter='All';caseSel=pendingCase;renderWork();pendingCase=null}
+  const v=$('#reel'); if(h!=='home'&&!v.paused){v.pause();syncPlay()} else if(h==='home'&&!reduce&&!userPaused){v.play().catch(()=>{});syncPlay()}
+  document.title = h==='home' ? 'RPM Media & Advertising' : 'RPM · '+h[0].toUpperCase()+h.slice(1);
+  if(pendingAnchor){const el=document.getElementById(pendingAnchor);pendingAnchor=null;if(el){el.scrollIntoView();return}}
+  window.scrollTo(0,0);
+}
+window.addEventListener('hashchange',route);
+document.addEventListener('click',e=>{
+  const a=e.target.closest('a[data-svc]'); if(a) pendingSvc=+a.dataset.svc;
+  const c=e.target.closest('a[data-case]'); if(c) pendingCase=+c.dataset.case;
+  const g=e.target.closest('a[data-goto]'); if(g) pendingAnchor=g.dataset.goto;
+  const l=e.target.closest('a[href^="#"]'); if(l && l.getAttribute('href')===location.hash){route()}
+});
+$('#burger').addEventListener('click',()=>{const m=$('#mnav');m.hidden=!m.hidden;$('#burger').setAttribute('aria-expanded',String(!m.hidden));$('#burger').textContent=m.hidden?'Menu':'Close'});
+$('#toTop').addEventListener('click',()=>window.scrollTo({top:0,behavior:reduce?'auto':'smooth'}));
+
+/* ---------- hero video ---------- */
+const v=$('#reel'); let userPaused=false;
+function fmt(s){s=Math.max(0,Math.floor(s||0));return Math.floor(s/60)+':'+String(s%60).padStart(2,'0')}
+function syncPlay(){const p=v.paused;$('#icoPause').hidden=p;$('#icoPlay').hidden=!p;$('#vplay').setAttribute('aria-label',p?'Play showreel':'Pause showreel');$('#vctl').classList.toggle('show',p)}
+function syncSound(){const on=!v.muted;$('#vsound').setAttribute('aria-pressed',String(on));$('#vsound').classList.toggle('on',on);$('#vsoundL').textContent=on?'Sound off':'Sound on';$('#waves').hidden=!on;$('#mutex').hidden=on}
+if(reduce){v.removeAttribute('autoplay');v.pause()}
+v.addEventListener('play',syncPlay);v.addEventListener('pause',syncPlay);
+v.addEventListener('timeupdate',()=>{const d=v.duration||21;$('#vprog').style.width=(v.currentTime/d*100)+'%';$('#vtime').textContent=fmt(v.currentTime)+' / '+fmt(d)});
+$('#vplay').addEventListener('click',()=>{if(v.paused){userPaused=false;v.play().catch(()=>{})}else{userPaused=true;v.pause()}});
+$('#vsound').addEventListener('click',()=>{v.muted=!v.muted;if(!v.muted){if(v.currentTime>1)v.currentTime=0;v.play().catch(()=>{})}syncSound()});
+$('#vbar').addEventListener('click',e=>{const r=e.currentTarget.getBoundingClientRect();v.currentTime=(e.clientX-r.left)/r.width*(v.duration||21)});
+v.addEventListener('click',()=>$('#vplay').click());
+syncPlay();syncSound();
+
+/* ---------- home ---------- */
+const clients=['Thomas Hearn','G&W Furniture','Oliviers','Chrysties','Maitland’s','De Vere Golf'];
+$('#marquee').innerHTML=clients.concat(clients).map(c=>`<span>${esc(c)}</span>`).join('');
+const channels=[['TV','Local and regional TV, scripted, shot and booked.',1],['Radio','Spots written, voiced, produced and on air.',2],['Direct mail','Mailers to past customers and postcodes that buy.',3],['Press','Local press, inserts, posters and point of sale.',4],['Digital','Social ads, display and retargeting, always on.',5]];
+$('#channels').innerHTML=channels.map(c=>`<a class="channel" href="#services" data-svc="${c[2]}"><span class="mono" style="color:var(--dim)">Channel</span><span class="stack" style="gap:8px"><span class="disp">${c[0]}</span><span class="muted" style="font-size:15px">${c[1]}</span></span></a>`).join('');
+
+const problems=[
+ {q:'We spend on ads. The showroom’s still quiet.',cause:'It’s rarely the budget. It’s a radius drawn too tight, generic keywords you’ll never outbid the nationals on, and no warm audience to bring people back.',fix:'We plan the mix around your real catchment: TV or radio for reach, mail to the households that buy, digital to bring them back. Then we measure calls, directions and visits, not likes.',tags:['Media planning','TV & radio','Retargeting']},
+ {q:'Our sale events don’t land.',cause:'Most events start on launch day. No warm pool, one generic ad, and no reason to come in this week rather than next.',fix:'A preview mailer to your customers, radio and TV to build the buzz, press for reach, and product ads with real prices and stock counts live from day one.',tags:['Sale events','Direct mail','TV & radio']},
+ {q:'We’ve got great stock but nothing to post.',cause:'Your best asset is the showroom. It just isn’t on camera often enough.',fix:'A monthly shoot in-store, edited into a month of posts and reels, scheduled and boosted for you.',tags:['Content','Social','Retainer']},
+ {q:'Our website lets us down.',cause:'Most retail sites are built like catalogues nobody has time to maintain.',fix:'Fast, zero-maintenance sites that show every range you carry and push people to visit, call or get directions.',tags:['Websites','Landing pages']}];
+let prob=0;
+function renderProb(){
+  $('#probOpts').innerHTML=problems.map((p,i)=>`<button class="opt" aria-pressed="${i===prob}" data-i="${i}"><span class="mono">Problem</span><span style="font-weight:500">${esc(p.q)}</span></button>`).join('');
+  const p=problems[prob];
+  $('#probOut').innerHTML=`<div class="stack fade-in" style="gap:28px;flex:1"><span class="mono muted">The usual cause</span><p class="h2" style="font-size:clamp(24px,2.6vw,36px)">${esc(p.cause)}</p><div style="height:1px;background:var(--line)"></div><span class="mono accent">What we do about it</span><p style="font-size:19px;color:var(--soft)">${esc(p.fix)}</p><div class="chips" style="margin-top:auto">${p.tags.map(t=>`<span class="mono chip">${esc(t)}</span>`).join('')}</div><a class="btn btn-a" href="#services" style="align-self:flex-start">How we fix it</a></div>`;
+}
+$('#probOpts').addEventListener('click',e=>{const b=e.target.closest('.opt');if(b){prob=+b.dataset.i;renderProb();$$('#probOpts .opt')[prob].focus()}});
+renderProb();
+
+const stages=[
+ {n:'Cold',g:'Get seen',what:'TV, radio, press and social video that put your store and your event in front of the whole catchment.',who:'Every household within real driving distance of your store.',kpi:'Reach, frequency, and the size of the warm audience we’re building.'},
+ {n:'Warm',g:'Give a reason',what:'Direct mail to past customers and target postcodes, plus offer ads with real prices, real stock and a deadline.',who:'Past customers, nearby households and anyone who’s engaged or visited the site.',kpi:'Response rate, cost per result, site visits.'},
+ {n:'Convert',g:'Get them in',what:'Call, directions and enquiry ads, email and SMS, and landing pages built to book visits.',who:'Your hottest audience and your existing customer list.',kpi:'Calls, directions, enquiries and sales in-store.'}];
+let stage=0;
+function renderStage(){
+  $('#stageTabs').innerHTML=stages.map((s,i)=>`<button class="tab" role="tab" aria-selected="${i===stage}" data-i="${i}"><span class="mono">Stage ${i+1} of 3</span><span class="disp">${s.n}</span><span style="font-weight:600;font-size:18px">${s.g}</span></button>`).join('');
+  const s=stages[stage];
+  $('#stageDetail').innerHTML=[['What runs',s.what],['Who sees it',s.who],['What we measure',s.kpi]].map(x=>`<div class="fade-in"><span class="mono">${x[0]}</span><p>${esc(x[1])}</p></div>`).join('');
+}
+$('#stageTabs').addEventListener('click',e=>{const b=e.target.closest('.tab');if(b){stage=+b.dataset.i;renderStage();$$('#stageTabs .tab')[stage].focus()}});
+renderStage();
+
+const homeSvcs=[['Sale & event campaigns','Clearances, stock sales and relaunches run across every channel, so the doors are busy from day one.',0],['Media planning & buying','The right mix for your catchment and budget, with the airtime, print and drops booked for you.',1],['Creative production','TV and radio ads, mailers, press artwork and social creative, with one look and one message.',4],['Digital & social','Social ads run as a cold, warm, convert system and managed every week.',5],['Content & websites','Monthly in-store shoots and fast, zero-maintenance sites built to drive visits.',6],['Data & reporting','Your customer list put to work in mail and digital, with one plain-English report.',7]];
+$('#homeSvcs').innerHTML=homeSvcs.map(s=>`<a class="svc-card card" href="#services" data-svc="${s[2]}"><span class="h2">${esc(s[0])}</span><p>${esc(s[1])}</p><span class="arrow">${ARROW}</span></a>`).join('');
+
+const retain=[['Every channel, one calendar','TV, radio, mail, press and digital planned together.'],['Creative made in-house','Ads, scripts, mailers and content with one look and one message.'],['Media booked for you','Airtime, print and mail drops handled end to end.'],['Reports in plain English','What ran, what worked, what we’re changing next.']];
+$('#retainRows').innerHTML=retain.map(r=>`<div class="row"><span class="mono">+</span><div class="stack" style="gap:6px"><span class="h2" style="font-size:26px">${r[0]}</span><span class="muted">${r[1]}</span></div></div>`).join('');
+
+const faqs=[
+ ['Do you only work with furniture retailers?','Furniture is our specialism and where we have the most depth, but the same approach works for any retailer that needs people through the door.'],
+ ['Do you handle TV and radio yourselves?','Yes. We plan the campaign, produce the ads and book the airtime, then report on it alongside every other channel.'],
+ ['What budget do we need?','It depends on the channels and your catchment. Digital and mail can start small; TV and radio need more to work. Most retail clients start around [£ / MONTH]. If it’s too little to move the needle, we’ll say so.'],
+ ['Do we have to sign a long contract?','[CONTRACT TERMS, e.g. 3-month minimum, then rolling monthly].'],
+ ['Who actually runs our account?','The same small team you meet. No hand-offs to juniors you never see.'],
+ ['How do we know it’s working?','A monthly report focused on calls, directions, enquiries and sales, plus a call to walk you through it.']];
+let faqOpen=0;
+function renderFaq(){
+  $('#faq').innerHTML=faqs.map((f,i)=>`<div class="faq-item"><button class="faq-q" aria-expanded="${i===faqOpen}" aria-controls="fa${i}" id="fq${i}" data-i="${i}"><span>${esc(f[0])}</span><span class="mono">${i===faqOpen?'–':'+'}</span></button><p class="faq-a" id="fa${i}" ${i===faqOpen?'':'hidden'}>${esc(f[1])}</p></div>`).join('');
+}
+$('#faq').addEventListener('click',e=>{const b=e.target.closest('.faq-q');if(b){const i=+b.dataset.i;faqOpen=faqOpen===i?-1:i;renderFaq();$('#fq'+i).focus()}});
+renderFaq();
+
+/* ---------- services ---------- */
+const svcs=[
+ {n:'Sale & event campaigns',img:'[EVENT CAMPAIGN, ALL CHANNELS]',lede:'Clearances, stock sales, relaunches and preview weekends, run across TV, radio, mail, press and digital so the doors are busy from day one. Our home turf.',inc:['Event concept, offer and timeline','Customer preview mailer and invitations','TV and radio spots to build the buzz','Press ads and digital banners','Product ads with real prices and stock counts'],best:'Retailers with stock to move and a date to hit.',kpi:['Footfall','Calls','Sales']},
+ {n:'TV advertising',img:'[TV AD STILL]',lede:'Local and regional TV that puts your store in front of the whole catchment, scripted, shot and booked for you.',inc:['Campaign planning and audience targeting','Scripting, filming and edit','Airtime planning and booking','Broadcast and on-demand TV [CONFIRM]','Post-campaign reporting'],best:'Retailers ready to own their region.',kpi:['Reach','Frequency','Footfall']},
+ {n:'Radio',img:'[RADIO STUDIO / SCRIPT]',lede:'Radio that gets your offer heard on the drive in: written, voiced, produced and booked.',inc:['Station and slot planning','Script writing','Voiceover and production','Airtime booking','Short bursts around sales and events'],best:'Time-limited offers that need to reach a lot of people fast.',kpi:['Reach','Frequency','Calls']},
+ {n:'Direct mail',img:'[MAILER MOCKUP]',lede:'Printed mailers that land on the right doormats: your past customers and the postcodes that buy.',inc:['Customer list clean-up and selection','Postcode and household targeting','Mailer design and copy','Print and postage handled','Response tracking with codes and offers'],best:'Rewarding loyal customers and launching events.',kpi:['Response rate','Redemptions','Sales']},
+ {n:'Press & print',img:'[PRESS AD MOCKUP]',lede:'Local press, inserts, posters and point of sale, with the same message working in print as everywhere else.',inc:['Full and half-page press ads','Inserts and leaflets','In-store posters and point of sale','Artwork to publisher spec'],best:'Big events and older, local audiences.',kpi:['Reach','Response','Footfall']},
+ {n:'Digital & social',img:'[AD CREATIVE GRID]',lede:'Facebook and Instagram ads and display banners run as a cold, warm, convert system: the always-on engine behind every campaign.',inc:['Cold, retarget and call campaigns','Audiences built from your customer list','Ad copy and creative for every placement','Animated display banners','Weekly optimisation'],best:'Every retailer. It’s the backbone of the plan.',kpi:['Calls','Directions','Enquiries']},
+ {n:'Content & websites',img:'[WEBSITE / IN-STORE SHOOT]',lede:'Monthly in-store shoots and fast, zero-maintenance websites that show every range you carry.',inc:['Monthly shoot turned into a month of posts','Scheduling and follower-growth boosts','Range and brand pages with no stock to update','Event landing pages','Directions, call and enquiry built in'],best:'Stores with great stock and a quiet online presence.',kpi:['Followers','Visits','Enquiries']},
+ {n:'Data & reporting',img:'[REPORT MOCKUP]',lede:'Your customer database is your best audience, for mail and for digital. We clean it, put it to work, and report across every channel in plain English.',inc:['Customer database clean-up and formatting','Mailing lists and custom audiences','One report across every channel','Clear next steps, not just numbers'],best:'Anyone sitting on a customer list they don’t use.',kpi:['Match rate','Response','ROI']}];
+let svcSel=0;
+function renderSvc(){
+  $('#svcList').innerHTML=svcs.map((s,i)=>`<button class="svc" role="tab" aria-selected="${i===svcSel}" data-i="${i}"><span class="h2">${esc(s.n)}</span><span class="dot"></span></button>`).join('');
+  const s=svcs[svcSel];
+  $('#svcPanel').innerHTML=`<div class="img ph"><span class="mono muted">${esc(s.img)}</span><span class="mono accent">${svcSel+1} of ${svcs.length}</span></div><div class="in fade-in"><div class="stack" style="gap:16px"><h2 class="disp">${esc(s.n)}</h2><p style="font-size:20px;color:var(--soft);max-width:640px">${esc(s.lede)}</p></div><div class="two"><div class="stack" style="gap:14px"><span class="mono muted">What's included</span>${s.inc.map(i=>`<div class="check"><span class="accent">${TICK}</span><span>${esc(i)}</span></div>`).join('')}</div><div class="stack" style="gap:24px"><div class="stack" style="gap:10px"><span class="mono muted">Best for</span><span style="font-size:18px">${esc(s.best)}</span></div><div class="stack" style="gap:10px"><span class="mono muted">We measure</span><div class="chips">${s.kpi.map(k=>`<span class="mono chip">${k}</span>`).join('')}</div></div><a class="btn btn-a" href="#contact" style="align-self:flex-start">Talk to us about this</a></div></div></div>`;
+}
+$('#svcList').addEventListener('click',e=>{const b=e.target.closest('.svc');if(b){svcSel=+b.dataset.i;renderSvc();$$('#svcList .svc')[svcSel].focus()}});
+renderSvc();
+const steps=[['01','Audit','We look at your current advertising, site and catchment, and tell you honestly what’s working.','Week 1'],['02','Plan','Channel mix, budget split, creative angles and a 30 / 60 / 90 day plan you sign off.','Week 1–2'],['03','Make & book','We write, shoot, record and design everything, book the media and set up every campaign for your approval.','Week 2–4'],['04','Run & report','Weekly optimisation, a monthly report and a call to agree what’s next.','Ongoing']];
+$('#steps').innerHTML=steps.map(s=>`<li><span class="disp">${s[0]}</span><span class="h2">${s[1]}</span><p>${s[2]}</p><span class="mono">${s[3]}</span></li>`).join('');
+const plans={ret:[
+ {k:'Retainer',n:'Digital',d:'Your social ads and content, fully managed.',inc:['Cold, retarget and call campaigns','Ad copy and creative','Monthly in-store content shoot','Monthly report']},
+ {k:'Retainer',n:'Multi-channel',d:'Digital plus direct mail and press, planned as one.',inc:['Everything in Digital','Direct mail to customers and postcodes','Press and print artwork','One calendar, one report'],f:1},
+ {k:'Retainer',n:'Full media',d:'Every channel, including TV and radio.',inc:['Everything in Multi-channel','TV and radio production and booking','Media planning and buying','Quarterly strategy review']}],
+ proj:[
+ {k:'Project',n:'Sale event',d:'A single event, run across the channels it needs.',inc:['Concept and timeline','Creative for every channel','Media booked and managed','Wrap-up report'],u:'one-off'},
+ {k:'Project',n:'TV or radio campaign',d:'Scripted, produced and on air.',inc:['Script and production','Station or channel planning','Airtime booking','Post-campaign report'],u:'one-off',f:1},
+ {k:'Project',n:'Direct mail drop',d:'One mailer to the right doormats.',inc:['List clean-up and targeting','Design and copy','Print and postage','Response tracking'],u:'one-off'}]};
+let planMode='ret';
+function renderPlans(){
+  $('#segRet').setAttribute('aria-pressed',String(planMode==='ret'));$('#segProj').setAttribute('aria-pressed',String(planMode==='proj'));
+  $('#plans').innerHTML=plans[planMode].map(p=>`<div class="plan card fade-in ${p.f?'feat':''}"><div style="display:flex;justify-content:space-between;align-items:center;gap:12px"><span class="mono">${p.k}</span>${p.f?'<span class="mono badge">Most popular</span>':''}</div><span class="h2" style="font-size:34px">${p.n}</span><div class="price"><span class="disp">[£]</span><span class="mono" style="opacity:.75">${p.u||'/ month'}</span></div><span style="opacity:.85">${p.d}</span><ul>${p.inc.map(i=>`<li>${TICK}<span>${i}</span></li>`).join('')}</ul><a class="btn ${p.f?'btn-a':'btn-g'}" href="#contact">Get a quote</a></div>`).join('');
+}
+$('#segRet').addEventListener('click',()=>{planMode='ret';renderPlans()});
+$('#segProj').addEventListener('click',()=>{planMode='proj';renderPlans()});
+renderPlans();
+
+/* ---------- work ---------- */
+const R='[RESULT]',M='[METRIC]';
+const cases=[
+ {c:'G&W Furniture',p:'Worcester & Gloucester',t:'The £1,075,489 Clearance Event',tags:['Events','Print','Digital'],img:'poster',b:'Clear over a million pounds of stock across two stores, with famous brands at up to 70% off.',d:'A followers-only preview week, eight cold creatives led by an event announcement, cold, retarget and call campaigns, plus a full-page press ad and animated display banners.',s:[['8','Cold creatives'],['3','Campaigns'],[R,M]]},
+ {c:'Thomas Hearn',p:'Kenilworth',t:'Stock Sale Event',tags:['Events','Digital'],img:'[PRODUCT CREATIVE]',b:'Turn a stock sale into urgency for a retailer trading since 1935, with nationwide delivery on offer.',d:'Product-level creatives carrying live stock counts and real before-and-after prices, running across cold, retarget and call campaigns under “when it’s gone, it’s gone”.',s:[['70%','Up to off'],['3','Campaigns'],[R,M]]},
+ {c:'Chrysties',p:'Hawick',t:'Mega Stock Clearance',tags:['Events','Digital'],img:'[SWIPE CAROUSEL]',b:'Stand out in the feed during a store-wide clearance in the Scottish Borders.',d:'A seamless ten-frame swipe carousel, one continuous panorama sliced into posts, backed by product videos shot in-store.',s:[['10','Frame carousel'],[R,M],[R,M]]},
+ {c:'Oliviers Furniture',p:'Barnard Castle & Richmond',t:'Always-on paid social',tags:['Digital'],img:'[AD CREATIVE GRID]',b:'Build steady footfall into two stores, month after month, not just around events.',d:'A full strategy with a cold and retargeting budget split, five creative angles and a 30–90 day optimisation plan.',s:[['5','Creative angles'],['90','Day plan'],[R,M]]},
+ {c:'Maitland’s',p:'Fraserburgh',t:'Growing the warm audience',tags:['Digital'],img:'[AD CREATIVE]',b:'Reach more of a wide, rural catchment in north-east Scotland.',d:'Shifted investment into cold reach to grow the warm retargeting pool, with the customer database loaded as custom audiences.',s:[[R,M],[R,M],[R,M]]},
+ {c:'De Vere Golf',p:'[LOCATION]',t:'[PROJECT TITLE]',tags:['Digital'],img:'[CAMPAIGN IMAGE]',b:'[BRIEF: one sentence]',d:'[WHAT WE DID: one or two sentences]',s:[[R,M],[R,M],[R,M]]},
+ {c:'[CLIENT]',p:'[TOWN]',t:'[TV & RADIO CAMPAIGN]',tags:['TV & radio','Events'],img:'[TV AD STILL]',b:'[BRIEF: one sentence]',d:'[WHAT WE DID: stations or channels, spots, flighting]',s:[[R,M],[R,M],[R,M]]},
+ {c:'[CLIENT]',p:'[TOWN]',t:'[DIRECT MAIL CAMPAIGN]',tags:['Direct mail'],img:'[MAILER MOCKUP]',b:'[BRIEF: one sentence]',d:'[WHAT WE DID: list, volume, offer, response tracking]',s:[[R,M],[R,M],[R,M]]}];
+const labels=['All','Events','TV & radio','Direct mail','Print','Digital'];
+let filter='All',caseSel=0;
+const inF=(c,f)=>f==='All'||c.tags.includes(f);
+function renderWork(){
+  $('#filters').innerHTML=labels.map(l=>`<button class="filter" aria-pressed="${l===filter}" data-f="${esc(l)}">${esc(l)} <span class="mono" style="opacity:.7">${cases.filter(c=>inF(c,l)).length}</span></button>`).join('');
+  const vis=cases.map((c,i)=>({...c,i})).filter(c=>inF(c,filter));
+  if(!vis.some(c=>c.i===caseSel)) caseSel=vis[0].i;
+  $('#caseList').innerHTML=vis.map(c=>`<button class="case-row" aria-pressed="${c.i===caseSel}" data-i="${c.i}"><span class="mono" style="color:var(--dim)">${String(c.i+1).padStart(2,'0')}</span><span class="stack" style="gap:6px;min-width:0"><span class="h2">${esc(c.c)}</span><small>${esc(c.t)}</small></span><span class="arrow">${ARROW}</span></button>`).join('');
+  const c=cases[caseSel]; const idx=vis.findIndex(x=>x.i===caseSel);
+  const img = c.img==='poster'
+    ? `<div class="img poster-mini" style="background:var(--signal)"><span class="mono">Followers-only preview</span><span class="disp" style="font-size:clamp(48px,6vw,96px)">Up to 70% off</span><span style="font-weight:600">Famous brands. Two stores.</span></div>`
+    : `<div class="img ph"><span class="mono muted">${esc(c.img)}</span><span class="chips">${c.tags.map(t=>`<span class="mono pill-dark">${esc(t)}</span>`).join('')}</span></div>`;
+  $('#casePanel').innerHTML=`${img}<div class="in fade-in"><div class="stack" style="gap:14px"><span class="mono accent">${esc(c.c)} · ${esc(c.p)}</span><h2 class="disp">${esc(c.t)}</h2></div><div class="two" style="gap:32px"><div class="stack" style="gap:10px"><span class="mono muted">The brief</span><span>${esc(c.b)}</span></div><div class="stack" style="gap:10px"><span class="mono muted">What we did</span><span>${esc(c.d)}</span></div></div><div class="stats">${c.s.map(s=>`<div><span class="disp">${esc(s[0])}</span><span class="mono muted">${esc(s[1])}</span></div>`).join('')}</div><div style="display:flex;flex-wrap:wrap;justify-content:space-between;gap:16px"><div style="display:flex;gap:8px"><button class="btn btn-g" id="cPrev" aria-label="Previous project" style="width:52px;padding:0">${ARROW.replace('M3 8h10M9 4l4 4-4 4','M13 8H3M7 4L3 8l4 4')}</button><button class="btn btn-g" id="cNext" aria-label="Next project" style="width:52px;padding:0">${ARROW}</button></div><a class="btn btn-a" href="#contact">Want results like this?</a></div></div>`;
+  $('#cPrev').onclick=()=>{caseSel=vis[(idx-1+vis.length)%vis.length].i;renderWork()};
+  $('#cNext').onclick=()=>{caseSel=vis[(idx+1)%vis.length].i;renderWork()};
+}
+$('#filters').addEventListener('click',e=>{const b=e.target.closest('.filter');if(b){filter=b.dataset.f;renderWork()}});
+$('#caseList').addEventListener('click',e=>{const b=e.target.closest('.case-row');if(b){caseSel=+b.dataset.i;renderWork();const nb=$(`#caseList [data-i="${caseSel}"]`);nb&&nb.focus()}});
+renderWork();
+
+/* ---------- about ---------- */
+$('#rules').innerHTML=[['Footfall over followers','Reach is nice. Calls, directions and sales pay the bills, so that’s what we report on.'],['Every channel, one plan','TV, radio, mail, press and digital work harder when one team runs them together.'],['Honest about budget','If your spend is too low to work, we’ll tell you before you spend it.'],['Plain English','Every report says what ran, what worked and what changes next.']].map(r=>`<div><span class="h2">${r[0]}</span><p>${r[1]}</p></div>`).join('');
+const people=[['Russell Pike','Founder','[BIO: two sentences on background and what he leads at RPM]'],['Reece Pike','[ROLE]','[BIO: two sentences on background and what he leads at RPM]'],['[NAME]','[ROLE]','[BIO]']];
+let person=-1;
+function renderTeam(){
+  $('#team').innerHTML=people.map((p,i)=>`<button class="person" aria-expanded="${i===person}" data-i="${i}"><span class="ph"><span class="mono muted">[PORTRAIT]</span></span><span class="in"><span style="display:flex;justify-content:space-between;align-items:center;gap:12px"><span class="h2" style="font-size:28px">${esc(p[0])}</span><span class="mono accent" style="font-size:20px">${i===person?'–':'+'}</span></span><span class="mono muted">${esc(p[1])}</span>${i===person?`<span style="color:var(--soft);padding-top:12px;border-top:1px solid var(--line);margin-top:8px">${esc(p[2])}</span>`:''}</span></button>`).join('');
+}
+$('#team').addEventListener('click',e=>{const b=e.target.closest('.person');if(b){const i=+b.dataset.i;person=person===i?-1:i;renderTeam();$(`#team [data-i="${i}"]`).focus()}});
+renderTeam();
+const towns=[['Gloucester','G&W Furniture','Event campaigns, digital and press for a family business trading for over 50 years.'],['Worcester','G&W Furniture','The £1,075,489 Clearance Event across social, press and display.'],['Kenilworth','Thomas Hearn','Cold, retarget and call campaigns for a retailer trading since 1935.'],['Richmond','Oliviers Furniture','Always-on paid social across two stores in the North East.'],['Barnard Castle','Oliviers Furniture','Always-on paid social across two stores in the North East.'],['Hawick','Chrysties','Stock clearance campaigns and seamless swipe carousels in the Borders.'],['Fraserburgh','Maitland’s','Paid social built to reach a wide rural catchment in the north-east.']];
+let town=2;
+function renderTowns(){
+  $('#route').innerHTML=towns.map((t,i)=>`<button class="stop" aria-pressed="${i===town}" data-i="${i}"><span class="pin"></span><span class="mono">${t[0]}</span></button>`).join('');
+  const t=towns[town];
+  $('#townOut').innerHTML=`<div class="stack fade-in" style="gap:14px;min-width:0"><span class="mono muted">${t[0]}</span><span class="disp" style="font-size:clamp(40px,5vw,76px)">${esc(t[1])}</span><span style="color:var(--soft);max-width:560px">${esc(t[2])}</span></div><a class="btn btn-g" href="#work">See the work</a>`;
+}
+$('#route').addEventListener('click',e=>{const b=e.target.closest('.stop');if(b){town=+b.dataset.i;renderTowns();$(`#route [data-i="${town}"]`).focus()}});
+renderTowns();
+
+/* ---------- contact form ---------- */
+const F={step:1,needs:[],budget:'',timing:'',name:'',biz:'',email:'',phone:'',msg:'',err:''};
+const needOpts=['TV advertising','Radio','Direct mail','Press & print','Digital & social','A sale or event campaign','A new website','Not sure yet'];
+const budgets=['Under £1k','£1k – £5k','£5k – £15k','£15k +','Not sure'];
+const timings=['As soon as possible','Within 3 months','Just exploring'];
+const emailOk=s=>/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(s);
+function renderForm(){
+  $('#prog').style.width=['','25%','55%','85%','100%'][F.step];
+  let h='';
+  if(F.step===1){
+    h=`<form id="f1"><div class="stack" style="gap:10px"><span class="mono muted">Step 1 of 3</span><h2 class="h2">What do you need help with?</h2><span class="muted">Pick as many as you like.</span></div><div class="picks" role="group" aria-label="Services needed">${needOpts.map(o=>{const on=F.needs.includes(o);return `<button type="button" class="pick" aria-pressed="${on}" data-need="${esc(o)}"><span>${esc(o)}</span><span class="box">${on?TICK:''}</span></button>`}).join('')}</div><div style="display:flex;justify-content:flex-end"><button class="btn btn-a" type="submit" ${F.needs.length?'':'disabled'}>Next</button></div></form>`;
+  } else if(F.step===2){
+    const grp=(arr,key,label)=>`<div class="picks" role="radiogroup" aria-label="${label}" style="grid-template-columns:repeat(auto-fit,minmax(min(170px,100%),1fr))">${arr.map(o=>`<button type="button" role="radio" class="pick" aria-checked="${F[key]===o}" data-${key}="${esc(o)}"><span>${esc(o)}</span></button>`).join('')}</div>`;
+    h=`<form id="f2"><div class="stack" style="gap:10px"><span class="mono muted">Step 2 of 3</span><h2 class="h2">Roughly what's your monthly budget?</h2><span class="muted">Media and agency together. A ballpark is fine.</span></div>${grp(budgets,'budget','Monthly budget')}<div class="stack" style="gap:14px"><span style="font-weight:600">When do you want to start?</span>${grp(timings,'timing','Start date')}</div><div class="form-nav"><button type="button" class="btn btn-g" data-back>Back</button><button class="btn btn-a" type="submit" ${F.budget?'':'disabled'}>Next</button></div></form>`;
+  } else if(F.step===3){
+    const fld=(id,l,type,ac,ph,req)=>`<div class="field"><label for="c-${id}">${l}${req?' *':''}</label><input class="inp" id="c-${id}" name="${id}" type="${type}" autocomplete="${ac}" placeholder="${ph}" value="${esc(F[id])}"></div>`;
+    h=`<form id="f3" novalidate><div class="stack" style="gap:10px"><span class="mono muted">Step 3 of 3</span><h2 class="h2">Where should we reply?</h2></div><div class="fields">${fld('name','Your name','text','name','Jane Smith',1)}${fld('biz','Business','text','organization','Smith’s Furniture',1)}${fld('email','Email','email','email','jane@smiths.co.uk',1)}${fld('phone','Phone','tel','tel','01234 567890',0)}</div><div class="field"><label for="c-msg">Anything else we should know?</label><textarea class="inp" id="c-msg" name="msg" rows="4" placeholder="Stores, current advertising, upcoming events…" style="resize:vertical;min-height:120px">${esc(F.msg)}</textarea></div>${F.err?`<p class="err" role="alert">${esc(F.err)}</p>`:''}<div class="form-nav"><button type="button" class="btn btn-g" data-back>Back</button><button class="btn btn-a" type="submit">Send enquiry</button></div><span style="color:var(--dim);font-size:14px">We'll only use your details to reply. [PRIVACY POLICY LINK]</span></form>`;
+  } else {
+    h=`<div class="stack fade-in" style="gap:28px;padding-block:24px"><span style="width:72px;height:72px;border-radius:50%;background:var(--signal);color:var(--ink);display:flex;align-items:center;justify-content:center"><svg width="32" height="32" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 8.5l3.2 3L13 4.5"></path></svg></span><h2 class="disp" style="font-size:clamp(40px,4.4vw,68px)">Thanks, ${esc(F.name.trim().split(' ')[0]||'there')}.</h2><p style="font-size:19px;color:var(--soft);max-width:520px">This is a demo, so nothing was sent. On the live site, the team would be in touch within one working day.</p><div class="summary"><div><span class="mono muted">Business</span><span>${esc(F.biz)}</span></div><div><span class="mono muted">Looking for</span><span>${esc(F.needs.join(', '))}</span></div><div><span class="mono muted">Budget</span><span>${esc(F.budget)}</span></div></div><div class="ctas"><a class="btn btn-a" href="#work">See our work</a><button class="btn btn-g" type="button" data-reset>Start again</button></div></div>`;
+  }
+  $('#formIn').innerHTML=h;
+}
+$('#formIn').addEventListener('click',e=>{
+  const n=e.target.closest('[data-need]'); if(n){const o=n.dataset.need;F.needs=F.needs.includes(o)?F.needs.filter(x=>x!==o):F.needs.concat(o);renderForm();$(`#formIn [data-need="${CSS.escape(o)}"]`).focus();return}
+  const b=e.target.closest('[data-budget]'); if(b){F.budget=b.dataset.budget;renderForm();$(`#formIn [data-budget="${CSS.escape(F.budget)}"]`).focus();return}
+  const t=e.target.closest('[data-timing]'); if(t){F.timing=t.dataset.timing;renderForm();$(`#formIn [data-timing="${CSS.escape(F.timing)}"]`).focus();return}
+  if(e.target.closest('[data-back]')){F.step--;F.err='';renderForm();return}
+  if(e.target.closest('[data-reset]')){Object.assign(F,{step:1,needs:[],budget:'',timing:'',name:'',biz:'',email:'',phone:'',msg:'',err:''});renderForm()}
+});
+$('#formIn').addEventListener('input',e=>{const el=e.target;if(el.name&&el.name in F){F[el.name]=el.value}});
+$('#formIn').addEventListener('submit',e=>{
+  e.preventDefault();
+  if(F.step===1&&F.needs.length)F.step=2;
+  else if(F.step===2&&F.budget)F.step=3;
+  else if(F.step===3){
+    if(!F.name.trim()||!F.biz.trim())F.err='Add your name and business so we know who we’re replying to.';
+    else if(!emailOk(F.email))F.err='That email address doesn’t look right. Check for a typo.';
+    else{F.err='';F.step=4}
+  }
+  renderForm();
+  const first=$('#formIn button, #formIn input'); if(F.step!==1&&first) first.focus();
+});
+renderForm();
+
+/* ---------- newsletter ---------- */
+$('#nlForm').addEventListener('submit',e=>{
+  e.preventDefault();
+  const val=$('#nlEmail').value;
+  if(!emailOk(val)){$('#nlErr').textContent='Enter a valid email address, like you@yourstore.co.uk.';$('#nlErr').hidden=false;return}
+  $('#nlErr').hidden=true;$('#nlForm').hidden=true;$('#nlDone').hidden=false;
+});
+$('#nlEmail').addEventListener('input',()=>$('#nlErr').hidden=true);
+
+route();
+})();
+</script>
+</body>
+</html>
